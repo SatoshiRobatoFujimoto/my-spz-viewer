@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { TrackballControls } from '@react-three/drei'
 import * as THREE from 'three'
 
 // Spark の型定義（必要に応じて調整）
@@ -122,6 +122,16 @@ function SparkScene({ url }: { url: string }) {
   return null
 }
 
+function ControlsSetup() {
+  return (
+    <TrackballControls
+      rotateSpeed={3.0}
+      zoomSpeed={1.2}
+      panSpeed={0.8}
+    />
+  )
+}
+
 export default function SplatViewerR3F({ url }: { url: string }) {
   return (
     <div style={{ width: '100%', height: '100vh' }}>
@@ -131,11 +141,7 @@ export default function SplatViewerR3F({ url }: { url: string }) {
       >
         <ambientLight intensity={0.9} />
         <SparkScene url={url} />
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-        />
+        <ControlsSetup />
       </Canvas>
     </div>
   )
